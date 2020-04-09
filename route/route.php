@@ -9,14 +9,9 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-// Route::get('think', function () {
-//     return 'hello,ThinkPHP5!11111';
-// });
-//发送验证码
-Route::post('user/sendcode','api/v1.User/sendCode');
 
-// Route::get('hello/:name', 'index/hello');
-
-// return [
-
-// ];
+// 不需要验证token
+Route::group('api/:version/',function(){
+    // 发送验证码
+	Route::post('user/sendcode','api/:version.User/sendCode');
+});
