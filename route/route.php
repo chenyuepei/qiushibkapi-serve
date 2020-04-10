@@ -13,5 +13,9 @@
 // 不需要验证token
 Route::group('api/:version/',function(){
     // 发送验证码
-	Route::post('user/sendcode','api/:version.User/sendCode');
+    Route::post('user/sendcode','api/:version.User/sendCode');
+     // 手机登录
+    Route::post('user/phonelogin','api/:version.User/phoneLogin');
+    // 账号密码登录
+	Route::post('user/login','api/:version.User/login');
 });

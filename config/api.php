@@ -2,7 +2,9 @@
 
 return [
     // 阿里大于
-    'aliSMS'=>[
+     // token过期时间
+     'token_expire'=>0,
+     'aliSMS'=>[
         'isopen'=> false,//开启阿里大于
         'accessKeyId'=>'<accessKeyId>',
         'accessSecret'=>'<accessSecret>',
@@ -12,6 +14,7 @@ return [
         'SignName'=>'<YourSignName>',
         'TemplateCode'=>'<YourTemplateCode>',
         // 验证码有效期
-        'expire'=>60
+        'expire'=>60,
+
     ]
 ];
