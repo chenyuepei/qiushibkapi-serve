@@ -58,7 +58,14 @@ class User extends Model
     if (array_key_exists('username',$arr)) { // 用户名
         return $this->where('username',$arr['username'])->find();
     }
-    
+    // 第三方参数
+    if (array_key_exists('provider',$arr)) {
+        $where = [
+            'type'=>$arr['provider'],
+            'openid'=>$arr['openid']
+        ];
+        return $this->userbind()->where($where)->find();
+    }
     return false;
    }
 
@@ -99,12 +106,23 @@ public function phoneLogin(){
    
 }
 // 用户是否被禁用
-public function checkStatus($arr){
-    $status = $arr['status'];
+public function checkStatus($arr,$isReget = false){
+    $status = 1;
+    if ($isReget) {
+        // 账号密码登录 和 第三方登录
+        $userid = array_key_exists('user_id',$arr)?$arr['user_id']:$arr['id'];
+        // 判断第三方登录是否绑定了手机号码
+        if ($userid < 1) return $arr;
+        // 查询user表
+        $user = $this->find($userid)->toArray();
+        // 拿到status
+        $status = $user['status'];
+    }else{
+        $status = $arr['status'];
+    }
     if($status==0) throw new BaseException(['code'=>200,'msg'=>'该用户已被禁用','errorCode'=>20001]);
     return $arr;
 }
-
    // 账号登录
 public function login(){
     // 获取所有参数
@@ -145,4 +163,37 @@ public function checkPassword($password,$hash){
     if(!password_verify($password,$hash)) throw new BaseException(['code'=>200,'msg'=>'密码错误','errorCode'=>20002]);
     return true;
 }
+
+// 绑定第三方登录
+public function userbind(){
+    return $this->hasMany('UserBind');
+}
+
+// 第三方登录
+public function otherlogin(){
+    // 获取所有参数
+    $param = request()->param();
+    // 解密过程（待添加）
+    // 验证用户是否存在
+    $user = $this->isExist(['provider'=>$param['provider'],'openid'=>$param['openid']]);
+    // 用户不存在，创建用户
+    $arr = [];
+    if (!$user) {
+        $user = $this->userbind()->create([
+            'type'=>$param['provider'],
+            'openid'=>$param['openid'],
+            'nickname'=>$param['nickName'],
+            'avatarurl'=>$param['avatarUrl'],
+        ]);
+        $arr = $user->toArray();
+        $arr['expires_in'] = $param['expires_in']; 
+        return $this->CreateSaveToken($arr);
+    }
+    // 用户是否被禁用
+    $arr = $this->checkStatus($user->toArray(),true);
+    // 登录成功，返回token
+    $arr['expires_in'] = $param['expires_in']; 
+    return $this->CreateSaveToken($arr);
+}
+
 }

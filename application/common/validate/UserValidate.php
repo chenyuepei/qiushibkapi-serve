@@ -17,11 +17,11 @@ class UserValidate extends BaseValidate
         'code'=>'require|number|length:4|isPefectCode',
         'username'=>'require',
         'password'=>'require|alphaDash',
-        // 'provider'=>'require',
-        // 'openid'=>'require',
-        // 'nickName'=>'require',
-        // 'avatarUrl'=>'require',
-        // 'expires_in'=>'require',
+        'provider'=>'require',
+        'openid'=>'require',
+        'nickName'=>'require',
+        'avatarUrl'=>'require',
+        'expires_in'=>'require',
         // 'id'=>'require|integer|>:0',
         // 'page'=>'require|integer|>:0',
         // 'email'=>'require|email',
@@ -60,8 +60,8 @@ class UserValidate extends BaseValidate
         'phonelogin'=>['phone','code'],
         // 账号密码登录
         'login'=>['username','password'],
-        // // 第三方登录
-        // 'otherlogin'=>['provider','openid','nickName','avatarUrl','expires_in'],
+        // 第三方登录
+        'otherlogin'=>['provider','openid','nickName','avatarUrl','expires_in'],
         // 'post'=>['id','page'],
         // 'allpost'=>['page'],
         // 'bindphone'=>['phone','code'],

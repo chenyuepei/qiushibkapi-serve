@@ -35,4 +35,13 @@ public function login(){
   $token = (new UserModel())->login();
   return self::showResCode('登录成功',['token'=>$token]);
 }
+
+// 第三方登录
+public function otherLogin(){
+  // 验证登录信息
+  (new UserValidate())->goCheck('otherlogin');
+  $token = (new UserModel())->otherlogin();
+  return self::showResCode('登录成功',['token'=>$token]);
+}
+
 }

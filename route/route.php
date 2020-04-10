@@ -17,5 +17,7 @@ Route::group('api/:version/',function(){
      // 手机登录
     Route::post('user/phonelogin','api/:version.User/phoneLogin');
     // 账号密码登录
-	Route::post('user/login','api/:version.User/login');
+    Route::post('user/login','api/:version.User/login');
+    // 第三方登录
+	Route::post('user/otherlogin','api/:version.User/otherLogin');
 });
