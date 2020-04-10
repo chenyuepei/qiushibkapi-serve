@@ -109,13 +109,9 @@ public function phoneLogin(){
 public function checkStatus($arr,$isReget = false){
     $status = 1;
     if ($isReget) {
-        // 账号密码登录 和 第三方登录
+        // 账号密码登录
         $userid = array_key_exists('user_id',$arr)?$arr['user_id']:$arr['id'];
-        // 判断第三方登录是否绑定了手机号码
-        if ($userid < 1) return $arr;
-        // 查询user表
         $user = $this->find($userid)->toArray();
-        // 拿到status
         $status = $user['status'];
     }else{
         $status = $arr['status'];
@@ -195,5 +191,26 @@ public function otherlogin(){
     $arr['expires_in'] = $param['expires_in']; 
     return $this->CreateSaveToken($arr);
 }
+
+// 验证第三方登录是否绑定手机
+public function OtherLoginIsBindPhone($user){
+    // 验证是否是第三方登录
+    if(array_key_exists('type',$user)){
+        if($user['user_id']<1){
+            throw new BaseException(['code'=>200,'msg'=>'请先绑定手机！','errorCode'=>20008]);
+        }
+        return $user['user_id'];
+    }
+    // 账号密码登录
+    return $user['id'];
+}
+
+// 退出登录
+public function logout(){
+    //获取并清除缓存
+    if (!Cache::pull(request()->userToken)) throw new BaseException(['code'=>200,'msg'=>'你已经退出了','errorCode'=>30006]);
+    return true;
+}
+
 
 }

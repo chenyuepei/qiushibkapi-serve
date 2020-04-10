@@ -11,6 +11,7 @@
 
 
 // 不需要验证token
+
 Route::group('api/:version/',function(){
     // 发送验证码
     Route::post('user/sendcode','api/:version.User/sendCode');
@@ -21,3 +22,9 @@ Route::group('api/:version/',function(){
     // 第三方登录
 	Route::post('user/otherlogin','api/:version.User/otherLogin');
 });
+Route::group('api/:version/',function(){
+   // 退出登录
+   Route::post('user/logout','api/:version.User/logout');
+   
+})->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
+

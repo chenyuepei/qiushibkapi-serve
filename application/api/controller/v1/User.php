@@ -44,4 +44,12 @@ public function otherLogin(){
   return self::showResCode('登录成功',['token'=>$token]);
 }
 
+// 退出登录
+public function logout(){
+  // 退出登录
+  (new UserModel())->logout();
+  return self::showResCodeWithOutData('退出成功');
+}
+
+
 }
