@@ -20,8 +20,14 @@ Route::group('api/:version/',function(){
     // 账号密码登录
     Route::post('user/login','api/:version.User/login');
     // 第三方登录
-	Route::post('user/otherlogin','api/:version.User/otherLogin');
+    Route::post('user/otherlogin','api/:version.User/otherLogin');
+     // 获取文章分类
+   Route::get('postclass', 'api/:version.PostClass/index');
+    // 获取话题分类
+    Route::get('topicclass','api/v1.TopicClass/index');
 });
+
+
 Route::group('api/:version/',function(){
    // 退出登录
    Route::post('user/logout','api/:version.User/logout');
