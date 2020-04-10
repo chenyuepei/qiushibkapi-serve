@@ -25,6 +25,10 @@ Route::group('api/:version/',function(){
    Route::get('postclass', 'api/:version.PostClass/index');
     // 获取话题分类
     Route::get('topicclass','api/v1.TopicClass/index');
+      // 获取热门话题
+    Route::get('hottopic','api/v1.Topic/index');
+     // 获取指定话题分类下的话题列表
+     Route::get('topicclass/:id/topic/:page', 'api/v1.TopicClass/topic');
 });
 
 
