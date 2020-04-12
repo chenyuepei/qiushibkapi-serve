@@ -14,3 +14,9 @@
 function TApiException($msg = '异常', $errorCode = 999, $code = 400){
     throw new \app\lib\exception\BaseException(['code'=>$code,'msg'=>$msg,'errorCode'=>$errorCode]);
 }
+// 获取文件完整url
+function getFileUrl($url='')
+{
+    if (!$url) return;
+    return url($url,'',false,true);
+}

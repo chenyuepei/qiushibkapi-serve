@@ -36,5 +36,14 @@ Route::group('api/:version/',function(){
    // 退出登录
    Route::post('user/logout','api/:version.User/logout');
    
+})->middleware(['ApiUserAuth']);
+
+// 用户操作（绑定手机）
+Route::group('api/:v1/',function(){
+ 
+  // 上传多图
+  Route::post('image/uploadmore','api/:v1.Image/uploadMore');
+ 
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
+
 
