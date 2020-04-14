@@ -36,7 +36,7 @@ class UserValidate extends BaseValidate
         // 'newpassword'=>'require|alphaDash',
         // 'renewpassword'=>'require|confirm:newpassword',
         // 'follow_id'=>'require|integer|>:0|isUserExist',
-        // 'user_id'=>'require|integer|>:0'
+        //'user_id'=>'require|integer|>:0'
     ];
     
     /**

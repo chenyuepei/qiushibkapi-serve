@@ -6,7 +6,7 @@ use think\Model;
 
 class Image extends Model
 {
-    //protected $autoWriteTimestamp = true;
+    protected $autoWriteTimestamp = true;
   // 上传多图
 public function uploadMore(){
     $image = $this->upload(request()->userId,'imglist');
@@ -46,5 +46,9 @@ public function upload($userid = '',$field = ''){
         'url'=>$file['data'],
         'user_id'=>$userid
     ]);
+}
+// 图片是否存在
+public function isImageExist($id,$userid){
+    return $this->where('user_id',$userid)->field('id')->find($id);
 }
 }

@@ -14,4 +14,5 @@ public function uploadMore(){
     $list = (new ImageModel())->uploadMore();
     return self::showResCode('上传成功',['list'=>$list]);
 }
+
 }

@@ -29,6 +29,8 @@ Route::group('api/:version/',function(){
     Route::get('hottopic','api/v1.Topic/index');
      // 获取指定话题分类下的话题列表
      Route::get('topicclass/:id/topic/:page', 'api/v1.TopicClass/topic');
+      // 获取文章详情
+    Route::get('post/:id', 'api/v1.Post/index');
 });
 
 
@@ -38,11 +40,14 @@ Route::group('api/:version/',function(){
    
 })->middleware(['ApiUserAuth']);
 
+
 // 用户操作（绑定手机）
 Route::group('api/:v1/',function(){
  
   // 上传多图
   Route::post('image/uploadmore','api/:v1.Image/uploadMore');
+   // 发布文章
+  Route::post('post/create','api/v1.Post/create');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 
