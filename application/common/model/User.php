@@ -211,6 +211,32 @@ public function logout(){
     if (!Cache::pull(request()->userToken)) throw new BaseException(['code'=>200,'msg'=>'你已经退出了','errorCode'=>30006]);
     return true;
 }
-
-
+ // 关联文章
+ public function post(){
+    return $this->hasMany('Post');
+}
+// 获取指定用户下文章
+public function getPostList(){
+    $params = request()->param();
+    $user = $this->get($params['id']);
+    if (!$user) TApiException('该用户不存在',10000);
+    return $user->post()->with([
+            'user'=>function($query){
+                return $query->field('id,username,userpic');
+            },'images'=>function($query){
+                return $query->field('url');
+            },'share'])->where('isopen',1)->page($params['page'],10)->select();
+}
+// 获取指定用户下所有文章
+public function getAllPostList(){
+    $params = request()->param();
+    // 获取用户id
+    $user_id=request()->userId;
+    return $this->get($user_id)->post()->with([
+        'user'=>function($query){
+            return $query->field('id,username,userpic');
+        },'images'=>function($query){
+            return $query->field('url');
+        },'share'])->page($params['page'],10)->select();
+}
 }

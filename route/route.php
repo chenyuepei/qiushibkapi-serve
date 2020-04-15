@@ -31,6 +31,12 @@ Route::group('api/:version/',function(){
      Route::get('topicclass/:id/topic/:page', 'api/v1.TopicClass/topic');
       // 获取文章详情
     Route::get('post/:id', 'api/v1.Post/index');
+    // 获取指定话题下的文章列表
+    Route::get('topic/:id/post/:page', 'api/v1.Topic/post');
+     // 获取指定文章分类下的文章
+     Route::get('postclass/:id/post/:page', 'api/v1.PostClass/post');
+      // 获取指定用户下的文章
+    Route::get('user/:id/post/:page', 'api/v1.User/post');
 });
 
 
@@ -48,6 +54,8 @@ Route::group('api/:v1/',function(){
   Route::post('image/uploadmore','api/:v1.Image/uploadMore');
    // 发布文章
   Route::post('post/create','api/v1.Post/create');
+   // 获取指定用户下的所有文章（含隐私）
+   Route::get('user/post/:page', 'api/v1.User/Allpost');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 

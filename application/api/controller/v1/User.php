@@ -50,6 +50,16 @@ public function logout(){
   (new UserModel())->logout();
   return self::showResCodeWithOutData('退出成功');
 }
-
-
+// 用户发布文章列表
+public function post(){
+  (new UserValidate())->goCheck('post'); 
+  $list = (new UserModel())->getPostList();
+  return self::showResCode('获取成功',['list'=>$list]);
+}
+// 用户发布文章列表
+public function Allpost(){
+  (new UserValidate())->goCheck('allpost'); 
+  $list = (new UserModel())->getAllPostList();
+  return self::showResCode('获取成功',['list'=>$list]);
+}
 }
