@@ -239,4 +239,10 @@ public function getAllPostList(){
             return $query->field('url');
         },'share'])->page($params['page'],10)->select();
 }
+// 搜索用户
+public function Search(){
+    // 获取所有参数
+    $param = request()->param();
+    return $this->where('username','like','%'.$param['keyword'].'%')->page($param['page'],10)->hidden(['password'])->select();
+}
 }

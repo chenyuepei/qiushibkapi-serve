@@ -37,6 +37,14 @@ Route::group('api/:version/',function(){
      Route::get('postclass/:id/post/:page', 'api/v1.PostClass/post');
       // 获取指定用户下的文章
     Route::get('user/:id/post/:page', 'api/v1.User/post');
+     // 搜索话题
+     Route::post('search/topic', 'api/v1.Search/topic');
+      // 搜索文章
+    Route::post('search/post', 'api/v1.Search/post');
+     // 搜索用户
+     Route::post('search/user', 'api/v1.Search/user');
+     // 广告列表
+    Route::get('adsense/:type', 'api/v1.Adsense/index');
 });
 
 

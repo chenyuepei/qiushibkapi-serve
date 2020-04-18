@@ -25,5 +25,10 @@ public function getPost(){
         return $query->field('url');
     },'share'])->page($param['page'],10)->select();
 }
-
+// 根据标题搜索话题
+public function Search(){
+    // 获取所有参数
+    $param = request()->param();
+    return $this->where('title','like','%'.$param['keyword'].'%')->page($param['page'],10)->select();
+}
 }
