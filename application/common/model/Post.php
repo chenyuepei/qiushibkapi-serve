@@ -60,7 +60,10 @@ public function user(){
 public function share(){
     return $this->belongsTo('Post','share_id','id');
 }
-
+// 关联顶踩
+public function support(){
+    return $this->hasMany('Support');
+}
 // 获取文章详情
 public function getPostDetail(){
     // 获取所有参数

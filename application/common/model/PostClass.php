@@ -19,11 +19,15 @@ public function post(){
 public function getPost(){
     // 获取所有参数
     $param = request()->param();
+    $userId = request()->userId ? request()->userId : 0;
     return self::get($param['id'])->post()->with([
         'user'=>function($query){
             return $query->field('id,username,userpic');
         },'images'=>function($query){
             return $query->field('url');
-        },'share'])->page($param['page'],10)->select();
+        },'share'
+        ,'support'=>function($query) use($userId){
+            return $query->where('user_id',$userId);
+        }])->page($param['page'],10)->select();
 }
 }
