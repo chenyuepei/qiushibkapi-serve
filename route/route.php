@@ -45,6 +45,8 @@ Route::group('api/:version/',function(){
      Route::post('search/user', 'api/v1.Search/user');
      // 广告列表
     Route::get('adsense/:type', 'api/v1.Adsense/index');
+     // 获取当前文章的所有评论
+     Route::get('post/:id/comment','api/v1.Post/comment');
 });
 
 
@@ -66,6 +68,8 @@ Route::group('api/:v1/',function(){
    Route::get('user/post/:page', 'api/v1.User/Allpost');
    // 用户顶踩
    Route::post('support', 'api/v1.Support/index');
+    // 用户评论
+  Route::post('post/comment','api/v1.Comment/comment');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 

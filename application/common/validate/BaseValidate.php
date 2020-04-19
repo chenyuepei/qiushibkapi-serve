@@ -66,13 +66,13 @@ class BaseValidate extends Validate
         return "该用户已不存在";
     }
 
-    // // 评论是否存在
-    // protected function isCommentExist($value,$rule='',$data='',$field='')
-    // {
-    //     if ($value==0) return true;
-    //     if (\app\common\model\Comment::field('id')->find($value)) return true;
-    //     return "回复的评论已不存在";
-    // }
+    // 评论是否存在
+    protected function isCommentExist($value,$rule='',$data='',$field='')
+    {
+        if ($value==0) return true;
+        if (\app\common\model\Comment::field('id')->find($value)) return true;
+        return "回复的评论已不存在";
+    }
 
     // // 不能为空
     // protected function NotEmpty($value, $rule='', $data='', $field='')

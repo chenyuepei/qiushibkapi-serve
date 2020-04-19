@@ -85,4 +85,18 @@ public function Search(){
         return $query->field('url');
     },'share'])->page($param['page'],10)->select();
 }
+
+// 关联评论
+public function comment(){
+    return $this->hasMany('Comment');
+}
+// 获取评论
+public function getComment(){
+    $params = request()->param();
+    return self::get($params['id'])->comment()->with([
+        'user'=>function($query){
+            return $query->field('id,username,userpic');
+        }
+    ])->select();
+}
 }
