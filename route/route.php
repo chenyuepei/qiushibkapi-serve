@@ -70,6 +70,12 @@ Route::group('api/:v1/',function(){
    Route::post('support', 'api/v1.Support/index');
     // 用户评论
   Route::post('post/comment','api/v1.Comment/comment');
+    // 编辑头像
+  Route::post('edituserpic','api/v1.User/editUserpic');
+   // 编辑资料
+   Route::post('edituserinfo','api/v1.User/editinfo');
+     // 修改密码
+  Route::post('repassword','api/v1.User/rePassword');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 
