@@ -76,6 +76,10 @@ Route::group('api/:v1/',function(){
    Route::post('edituserinfo','api/v1.User/editinfo');
      // 修改密码
   Route::post('repassword','api/v1.User/rePassword');
+     // 加入黑名单
+  Route::post('addblack','api/:v1.Blacklist/addBlack');
+   // 移出黑名单
+   Route::post('removeblack','api/:v1.Blacklist/removeBlack');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 
