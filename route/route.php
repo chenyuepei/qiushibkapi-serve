@@ -47,6 +47,8 @@ Route::group('api/:version/',function(){
     Route::get('adsense/:type', 'api/v1.Adsense/index');
      // 获取当前文章的所有评论
      Route::get('post/:id/comment','api/v1.Post/comment');
+      // 检测更新
+    Route::post('update','api/v1.Update/update');
 });
 
 
@@ -80,6 +82,10 @@ Route::group('api/:v1/',function(){
   Route::post('addblack','api/:v1.Blacklist/addBlack');
    // 移出黑名单
    Route::post('removeblack','api/:v1.Blacklist/removeBlack');
+     // 用户反馈
+     Route::post('feedback','api/:v1.Feedback/feedback');
+      // 获取用户反馈列表
+    Route::get('feedbacklist/:page','api/:v1.Feedback/feedbacklist');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 

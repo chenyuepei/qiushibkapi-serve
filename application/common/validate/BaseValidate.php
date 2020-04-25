@@ -74,11 +74,11 @@ class BaseValidate extends Validate
         return "回复的评论已不存在";
     }
 
-    // // 不能为空
-    // protected function NotEmpty($value, $rule='', $data='', $field='')
-    // {
-    //     if (empty($value)) return $field."不能为空";
-    //     return true;
-    // }
+    // 不能为空
+    protected function NotEmpty($value, $rule='', $data='', $field='')
+    {
+        if (empty($value)) return $field."不能为空";
+        return true;
+    }
 
 }
