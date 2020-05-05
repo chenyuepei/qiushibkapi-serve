@@ -35,7 +35,7 @@ class UserValidate extends BaseValidate
         'oldpassword'=>'require',
         'newpassword'=>'require|alphaDash',
         'renewpassword'=>'require|confirm:newpassword',
-        // 'follow_id'=>'require|integer|>:0|isUserExist',
+        'follow_id'=>'require|integer|>:0|isUserExist',
         //'user_id'=>'require|integer|>:0'
     ];
     
@@ -70,11 +70,11 @@ class UserValidate extends BaseValidate
         'edituserpic'=>['userpic'],
         'edituserinfo'=>['name','sex','qg','job','birthday','path'],
         'repassword'=>['oldpassword','newpassword','renewpassword'],
-        // 'follow'=>['follow_id'],
-        // 'unfollow'=>['follow_id'],
-        // 'getfriends'=>['page'],
-        // 'getfens'=>['page'],
-        // 'getfollows'=>['page'],
+        'follow'=>['follow_id'],
+        'unfollow'=>['follow_id'],
+        'getfriends'=>['page'],
+        'getfens'=>['page'],
+        'getfollows'=>['page'],
     	// 'getuserinfo'=>['user_id']
     ];
 

@@ -86,6 +86,16 @@ Route::group('api/:v1/',function(){
      Route::post('feedback','api/:v1.Feedback/feedback');
       // 获取用户反馈列表
     Route::get('feedbacklist/:page','api/:v1.Feedback/feedbacklist');
+     // 关注
+    Route::post('follow','api/v1.User/follow');
+     // 取消关注
+     Route::post('unfollow','api/v1.User/unfollow');
+      // 互关列表
+    Route::get('friends/:page','api/v1.User/friends');
+     // 粉丝列表
+     Route::get('fens/:page','api/v1.User/fens');
+      // 关注列表
+    Route::get('follows/:page','api/v1.User/follows');
  
 })->middleware(['ApiUserAuth','ApiUserBindPhone','ApiUserStatus']);
 
